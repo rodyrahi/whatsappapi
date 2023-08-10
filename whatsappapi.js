@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
 app.get('/:number/:message', (req, res) => {
   const number = req.params.number;
   const formattedNumber = '91' + number.toString();
-  const message = req.params.message.replace(/'/g, ''); // Remove single quotes from the message
+  const message = req.params.message.replace(/['\[\]]/g, ''); // Remove single quotes, square brackets from the message
 
   console.log(formattedNumber);
 
