@@ -10,17 +10,20 @@ app.get('/', (req, res) => {
 })
 
 app.get('/:number/:message', (req, res) => {
-   
-    var number = req.params.number
-    number = '91'+ number.toString()
-    const message = req.params.message
-    console.log(+number);
-    client
-      .sendMessage(`${+number}@c.us`, message)
-      .then(async () =>  res.sendStatus(200))
-      .catch((error) => res.sendStatus(500));
+  const number = req.params.number;
+  const formattedNumber = '91' + number.toString();
+  const message = req.params.message.replace(/'/g, ''); // Remove single quotes from the message
 
-  })
+  console.log(formattedNumber);
+
+  client
+    .sendMessage(`${formattedNumber}@c.us`, message)
+    .then(() => res.json({ status: 'ok' })) // Send JSON response with "ok"
+    .catch((error) => {
+      console.error('Error:', error);
+      res.status(500).json({ status: 'error' }); // Send JSON response with "error"
+    });
+});
 
 
 app.listen(port, () => {
