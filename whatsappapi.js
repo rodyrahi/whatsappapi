@@ -14,12 +14,12 @@ app.post('/send-message', (req, res) => {
     const { number, message } = req.body;
 
     const formattedNumber = '91' + number.toString();
-    const sanitizedMessage = message.replace(/['\[\]]/g, ''); // Remove single quotes, square brackets from the message
+
 
     console.log(formattedNumber);
 
     client
-      .sendMessage(`${formattedNumber}@c.us`, sanitizedMessage)
+      .sendMessage(`${formattedNumber}@c.us`, message)
       .then(() => res.json({ status: 'ok' })) // Send JSON response with "ok"
       .catch((error) => {
         console.error('Error:', error);
