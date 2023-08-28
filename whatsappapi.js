@@ -1,7 +1,7 @@
 
 const express = require('express')
 var client = require("./whatsapp.js");
-
+var con = require("./database.js");
 const app = express()
 const port = 8888
 app.use(express.json());
@@ -10,18 +10,35 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 
+function executeQuery(query) {
+  return new Promise((resolve, reject) => {
+    con.query(query, (err, result, fields) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+}
 
-client.on('message', msg => {
-  if (msg.body == '!ping') {
-      msg.reply('pong');
-  }
 
-  console.log(msg);
-});
+app.get('/', async (req, res) => {
+
+  const result =  await executeQuery(`SELECT * FROM bot`)
+  console.log(result);
+  client.on('message', msg => {
 
 
-app.get('/', (req, res) => {
+    if (msg.body == result[0].message.toString()) {
 
+
+        msg.reply(result[0].reply);
+    }
+  
+    console.log(msg.body);
+  });
+  
   res.render('home')
 })
 
