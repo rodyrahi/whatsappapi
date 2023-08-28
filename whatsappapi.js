@@ -15,13 +15,13 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.get('/', (req, res) => {
-  client.on('message', msg => {
-    if (msg.body == '!ping') {
-        msg.reply('pong');
-    }
+  // client.on('message', msg => {
+  //   if (msg.body == '!ping') {
+  //       msg.reply('pong');
+  //   }
   
-    console.log(msg);
-  });
+  //   console.log(msg);
+  // });
   res.render('home')
 })
 
