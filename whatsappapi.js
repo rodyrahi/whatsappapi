@@ -42,6 +42,32 @@ app.get('/', async (req, res) => {
   res.render('home')
 })
 
+
+app.post('/message', async (req, res) => {
+
+  const {message , reply} = req.body
+
+  const result =  await executeQuery(`INSERT INTO bot (message, reply) VALUES (${message}, ${reply})`)
+  
+
+  // console.log(result);
+  // client.on('message', msg => {
+
+
+  //   if (msg.body.toLocaleLowerCase() == result[0].message.toString().toLocaleLowerCase()) {
+
+
+  //       msg.reply(result[0].reply);
+  //   }
+  
+  //   console.log(msg.body);
+  // });
+  
+  res.render('home')
+})
+
+
+
 app.post('/send-message', (req, res) => {
   try {
     const { number, message } = req.body;
