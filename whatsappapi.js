@@ -63,7 +63,7 @@ app.post('/message', async (req, res) => {
   //   console.log(msg.body);
   // });
   
-  res.render('home')
+  res.redirect('/')
 })
 
 
