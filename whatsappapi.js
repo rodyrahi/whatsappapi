@@ -30,7 +30,7 @@ app.get('/', async (req, res) => {
   client.on('message', msg => {
 
 
-    if (msg.body == result[0].message.toString()) {
+    if (msg.body.toLocaleLowerCase() == result[0].message.toString().toLocaleLowerCase()) {
 
 
         msg.reply(result[0].reply);
