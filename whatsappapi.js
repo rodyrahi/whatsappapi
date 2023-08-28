@@ -6,8 +6,23 @@ const app = express()
 const port = 8888
 app.use(express.json());
 
+app.use(express.static("public"));
+app.set("view engine", "ejs");
+app.use(express.urlencoded({ extended: true }));
+
+
+
+client.on('message', msg => {
+  if (msg.body == '!ping') {
+      msg.reply('pong');
+  }
+
+  console.log(msg);
+});
+
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+
+  res.render('home')
 })
 
 app.post('/send-message', (req, res) => {
