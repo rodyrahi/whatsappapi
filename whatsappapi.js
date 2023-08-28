@@ -47,7 +47,7 @@ app.post('/message', async (req, res) => {
 
   const {message , reply} = req.body
 
-  const result =  await executeQuery(`INSERT INTO bot (message, reply) VALUES (${message}, ${reply})`)
+  const result =  await executeQuery(`INSERT INTO bot (message, reply) VALUES ('${message}', '${reply}')`)
   
 
   // console.log(result);
