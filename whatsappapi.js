@@ -11,17 +11,17 @@ app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 
 
+client.on('message', msg => {
+  if (msg.body == '!ping') {
+      msg.reply('pong');
+  }
 
+  console.log(msg);
+});
 
 
 app.get('/', (req, res) => {
-  client.on('message', msg => {
-    if (msg.body == '!ping') {
-        msg.reply('pong');
-    }
-  
-    console.log(msg);
-  });
+
   res.render('home')
 })
 
