@@ -90,7 +90,7 @@ app.post('/send-message', (req, res) => {
     res.status(500).json({ status: 'error' }); // Send JSON response with "error"
   }
 
-  client.destroy()
+
 });
 
 
