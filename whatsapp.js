@@ -30,7 +30,7 @@ const client = new Client({
     console.log('Client is ready!');
   });
   
-  client.initialize();
+
 
 
   module.exports = client;

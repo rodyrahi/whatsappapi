@@ -69,6 +69,7 @@ app.post('/message', async (req, res) => {
 
 
 app.post('/send-message', (req, res) => {
+  client.initialize();
   try {
     const { number, message } = req.body;
 
@@ -88,6 +89,8 @@ app.post('/send-message', (req, res) => {
     console.error('Error:', error);
     res.status(500).json({ status: 'error' }); // Send JSON response with "error"
   }
+
+  client.destroy()
 });
 
 
