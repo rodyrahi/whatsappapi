@@ -91,15 +91,15 @@ app.post('/send-message', (req, res) => {
       .then(() => res.json({ status: 'ok' })) // Send JSON response with "ok"
       .catch((error) => {
         console.error('Error:', error);
-        res.status(500).json({ status: 'error' }); // Send JSON response with "error"
+        res.status(500).json({ status: 'error' }).then(  client.destroy()); // Send JSON response with "error"
       });
   } catch (error) {
     console.error('Error:', error);
-    res.status(500).json({ status: 'error' }); // Send JSON response with "error"
+    res.status(500).json({ status: 'error' }).then(  client.destroy()) // Send JSON response with "error"
   }
 
   });
-  client.destroy()
+
 
 
 });
