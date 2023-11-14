@@ -70,6 +70,11 @@ function executeQuery(query) {
 
 app.post('/send-message', (req, res) => {
   client.initialize();
+
+  client.on('ready', () => {
+    console.log('Client is ready!');
+
+  
   try {
     const { number, message } = req.body;
 
@@ -90,7 +95,7 @@ app.post('/send-message', (req, res) => {
     res.status(500).json({ status: 'error' }); // Send JSON response with "error"
   }
 
-
+  });
 });
 
 
