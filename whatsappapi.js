@@ -1,7 +1,7 @@
 
 const express = require('express')
 var client = require("./whatsapp.js");
-var con = require("./database.js");
+
 const app = express()
 const port = 8888
 app.use(express.json());
@@ -23,48 +23,48 @@ function executeQuery(query) {
 }
 
 
-app.get('/', async (req, res) => {
+// app.get('/', async (req, res) => {
 
-  const result =  await executeQuery(`SELECT * FROM bot`)
-  console.log(result);
-  client.on('message', msg => {
-
-
-    if (msg.body.toLocaleLowerCase() == result[0].message.toString().toLocaleLowerCase()) {
+//   const result =  await executeQuery(`SELECT * FROM bot`)
+//   console.log(result);
+//   client.on('message', msg => {
 
 
-        msg.reply(result[0].reply);
-    }
+//     if (msg.body.toLocaleLowerCase() == result[0].message.toString().toLocaleLowerCase()) {
+
+
+//         msg.reply(result[0].reply);
+//     }
   
-    console.log(msg.body);
-  });
+//     console.log(msg.body);
+//   });
   
-  res.render('home')
-})
+//   res.render('home')
+// })
 
 
-app.post('/message', async (req, res) => {
+// app.post('/message', async (req, res) => {
 
-  const {message , reply} = req.body
+//   const {message , reply} = req.body
 
-  const result =  await executeQuery(`INSERT INTO bot (message, reply) VALUES ('${message}', '${reply}')`)
+//   const result =  await executeQuery(`INSERT INTO bot (message, reply) VALUES ('${message}', '${reply}')`)
   
 
-  // console.log(result);
-  // client.on('message', msg => {
+//   // console.log(result);
+//   // client.on('message', msg => {
 
 
-  //   if (msg.body.toLocaleLowerCase() == result[0].message.toString().toLocaleLowerCase()) {
+//   //   if (msg.body.toLocaleLowerCase() == result[0].message.toString().toLocaleLowerCase()) {
 
 
-  //       msg.reply(result[0].reply);
-  //   }
+//   //       msg.reply(result[0].reply);
+//   //   }
   
-  //   console.log(msg.body);
-  // });
+//   //   console.log(msg.body);
+//   // });
   
-  res.redirect('/')
-})
+//   res.redirect('/')
+// })
 
 
 
