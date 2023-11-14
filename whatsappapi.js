@@ -68,6 +68,7 @@ function executeQuery(query) {
 
 
 
+client.initialize();
 app.post('/send-message', (req, res) => {
 
   console.log('post');
@@ -100,7 +101,6 @@ app.post('/send-message', (req, res) => {
   });
 
 
-  client.initialize();
 });
 
 
