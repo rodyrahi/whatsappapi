@@ -68,10 +68,10 @@ function executeQuery(query) {
 
 
 
-client.initialize();
+
 app.post('/send-message', (req, res) => {
 
-  console.log('post');
+  client.initialize();
  
 
   client.on('ready', () => {
@@ -99,6 +99,7 @@ app.post('/send-message', (req, res) => {
   }
 
   });
+  client.destroy()
 
 
 });
