@@ -26,7 +26,7 @@ const client = new Client({
     qrcode.generate(qr, { small: true });
   });
   
-  client.initialize();
+
  
 
   client.on('ready', () => {
