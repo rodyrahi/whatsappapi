@@ -3,20 +3,16 @@ const qrcode = require('qrcode-terminal');
 
 const client = new Client({
     restartOnAuthFail: true,
-    puppeteer: {
-      headless: true,
-      args: [
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-        "--disable-dev-shm-usage",
-        "--disable-accelerated-2d-canvas",
-        "--no-first-run",
-        "--no-zygote",
-        "--single-process", // <- this one doesn't work in Windows
-        "--disable-gpu",
-        "--use-gl=egl",
-      ],
-    },
+    puppeteer: { headless: true, args: 
+      [ 
+        '--no-sandbox', 
+        '--disable-setuid-sandbox', 
+        '--disable-dev-shm-usage', 
+        '--disable-accelerated-2d-canvas', 
+        '--no-first-run', 
+        '--no-zygote', 
+        '--single-process'] 
+      },
     authStrategy: new LocalAuth({
       clientId: 'raj',
     }),
@@ -26,15 +22,13 @@ const client = new Client({
     qrcode.generate(qr, { small: true });
   });
   
-  client.initialize();
+
+ 
 
   client.on('ready', () => {
     console.log('Client is ready!');
+  });
 
-
-  })
- 
-
-
+  client.initialize();
 
   module.exports = client;
