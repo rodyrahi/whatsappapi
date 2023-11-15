@@ -75,7 +75,7 @@ app.post('/send-message', (req, res) => {
     const formattedNumber = '91' + number.toString();
 
     console.log(formattedNumber);
-
+    client.initialize()
     client.on('ready', () => {
       console.log('Client is ready!');
 
@@ -94,7 +94,7 @@ app.post('/send-message', (req, res) => {
         });
     });
 
-    client.initialize();
+
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ status: 'error' }); // Send JSON response with "error"
