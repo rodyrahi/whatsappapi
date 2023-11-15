@@ -69,7 +69,6 @@ function executeQuery(query) {
 
 
 app.post('/send-message', async (req, res) => {
-  console.log('post');
   try {
     await client.initialize();
 
