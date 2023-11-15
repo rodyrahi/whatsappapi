@@ -29,10 +29,6 @@ const client = new Client({
 
  
 
-  client.on('ready', () => {
-    console.log('Client is ready!');
-  });
-
 
 
   module.exports = client;
