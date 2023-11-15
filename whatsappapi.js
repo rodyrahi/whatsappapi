@@ -69,12 +69,12 @@ function executeQuery(query) {
 
 
 
-app.post('/send-message', async(req, res) => {
+app.post('/send-message', (req, res) => {
 
- client.initialize();
+  client.initialize();
  
 
-  client.on('ready', async() => {
+  client.on('ready', () => {
     console.log('Client is ready!');
 
   
@@ -86,15 +86,13 @@ app.post('/send-message', async(req, res) => {
 
     console.log(formattedNumber);
 
-    try {
-      await client.sendMessage(`${formattedNumber}@c.us`, message);
-      res.json({ status: 'ok' }); // Send JSON response with "ok"
-    } catch (error) {
-      console.error('Error:', error);
-      res.status(500).json({ status: 'error' });
-    } finally {
-      await client.destroy(); // Close the client after the message is sent
-    }
+    client
+      .sendMessage(`${formattedNumber}@c.us`, message)
+      .then(() => res.json({ status: 'ok' })).then(  client.destroy()) // Send JSON response with "ok"
+      .catch((error) => {
+        console.error('Error:', error);
+        res.status(500).json({ status: 'error' }).then(  client.destroy()); // Send JSON response with "error"
+      });
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ status: 'error' }).then(  client.destroy()) // Send JSON response with "error"
