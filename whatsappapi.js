@@ -69,33 +69,43 @@ function executeQuery(query) {
 
 
 
-app.post('/send-message', async (req, res) => {
+app.post('/send-message', async(req, res) => {
+
+ client.initialize();
+ 
+
+  client.on('ready', async() => {
+    console.log('Client is ready!');
+
+  
   try {
-    await client.initialize();
+    const { number, message } = req.body;
 
-    client.on('ready', async () => {
-      console.log('Client is ready!');
+    const formattedNumber = '91' + number.toString();
 
-      const { number, message } = req.body;
-      const formattedNumber = '91' + number.toString();
 
-      console.log(formattedNumber);
+    console.log(formattedNumber);
 
-      try {
-        await client.sendMessage(`${formattedNumber}@c.us`, message);
-        res.json({ status: 'ok' }); // Send JSON response with "ok"
-      } catch (error) {
-        console.error('Error:', error);
-        res.status(500).json({ status: 'error' });
-      } finally {
-        await client.destroy(); // Close the client after the message is sent
-      }
-    });
+    try {
+      await client.sendMessage(`${formattedNumber}@c.us`, message);
+      res.json({ status: 'ok' }); // Send JSON response with "ok"
+    } catch (error) {
+      console.error('Error:', error);
+      res.status(500).json({ status: 'error' });
+    } finally {
+      await client.destroy(); // Close the client after the message is sent
+    }
   } catch (error) {
     console.error('Error:', error);
-    res.status(500).json({ status: 'error' });
+    res.status(500).json({ status: 'error' }).then(  client.destroy()) // Send JSON response with "error"
   }
+
+  });
+
+
+
 });
+
 
 
 app.listen(port, () => {
