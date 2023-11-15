@@ -70,37 +70,32 @@ function executeQuery(query) {
 
 
 app.post('/send-message', (req, res) => {
+
+
+
   try {
     const { number, message } = req.body;
+
     const formattedNumber = '91' + number.toString();
 
+
     console.log(formattedNumber);
-    client.initialize()
-    client.on('ready', () => {
-      console.log('Client is ready!');
 
-      client
-        .sendMessage(`${formattedNumber}@c.us`, message)
-        .then(() => {
-          console.log('Message sent successfully');
-          res.json({ status: 'ok' }); // Send JSON response with "ok"
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-          res.status(500).json({ status: 'error' }); // Send JSON response with "error"
-        })
-        .finally(() => {
-          client.destroy(); // Close the client after the message is sent or an error occurs
-        });
-    });
-
-
+    client
+      .sendMessage(`${formattedNumber}@c.us`, message)
+      .then(() => res.json({ status: 'ok' })) // Send JSON response with "ok"
+      .catch((error) => {
+        console.error('Error:', error);
+        res.status(500).json({ status: 'error' }); // Send JSON response with "error"
+      });
   } catch (error) {
     console.error('Error:', error);
-    res.status(500).json({ status: 'error' }); // Send JSON response with "error"
+    res.status(500).json({ status: 'error' }) // Send JSON response with "error"
   }
-});
 
+
+
+});
 
 
 
